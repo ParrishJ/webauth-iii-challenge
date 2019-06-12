@@ -10,6 +10,9 @@ exports.up = function (knex) {
 
         users
             .string('password', 300).notNullable();
+
+        users
+            .string('department', 300).notNullable();
     });
 };
 
