@@ -60,9 +60,12 @@ export default class SignUp extends React.Component {
         axios
             .post(endpoint, this.state)
             .then(res => {
-                localStorage.setItem('jwt', res.data.token);
-                console.log('token', res.data)
-                this.props.history.push('/users');
+                return axios.post('http://localhost:5000/api/login', this.state)
+                    .then(res => {
+                        localStorage.setItem('jwt', res.data.token);
+                        console.log('res.data', res.data)
+                        this.props.history.push('/users');
+                    })
             })
             .catch(error => {
                 console.error('ERROR', error);
